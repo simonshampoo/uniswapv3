@@ -81,6 +81,7 @@ contract UniswapV3PoolTest is Test {
         internal
         returns (uint256 poolBalance0, uint256 poolBalance1)
     {
+        setUp();
         token0.mint(address(this), params.wethBalance);
         token1.mint(address(this), params.usdcBalance);
 

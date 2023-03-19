@@ -81,7 +81,6 @@ contract UniswapV3PoolTest is Test {
         internal
         returns (uint256 poolBalance0, uint256 poolBalance1)
     {
-        setUp();
         token0.mint(address(this), params.wethBalance);
         token1.mint(address(this), params.usdcBalance);
 
@@ -92,11 +91,10 @@ contract UniswapV3PoolTest is Test {
         params.currentTick
     );
 
+        shouldTransferInCallback = params.shouldTransferInCallback;
         if (params.mintLiquidity) {
             (poolBalance0, poolBalance1) =
                 pool.mint(address(this), params.lowerTick, params.upperTick, params.liquidity, "");
         }
-
-        shouldTransferInCallback = params.shouldTransferInCallback;
     }
 }

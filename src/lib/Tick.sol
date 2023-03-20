@@ -14,11 +14,10 @@ library Tick {
     ) internal {
         Tick.Info storage tickInfo = self[tick]; 
         uint128 liquidityBefore = tickInfo.liquidity;
-        uint128 liquidityAfter = liquidityBefore + liquidityDelta;
         if (liquidityBefore == 0) {
             tickInfo.initalized = true; 
         }
 
-        tickInfo.liquidity = liquidityAfter; 
+        tickInfo.liquidity = liquidityBefore + liquidityDelta; 
     }
 }

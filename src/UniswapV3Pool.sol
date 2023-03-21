@@ -101,7 +101,7 @@ contract UniswapV3Pool {
         emit Mint(msg.sender, owner, lowerTick, upperTick, amount, amount0, amount1);
     }
 
-    function swap(address recipient) public returns (int256 amount0, int256 amount1) {
+    function swap(address recipient, bytes calldata data) public returns (int256 amount0, int256 amount1) {
         int24 nextTick = 85184;
         uint160 nextPrice = 5604469350942327889444743441197;
 
@@ -114,7 +114,7 @@ contract UniswapV3Pool {
 
         uint256 balance1Before = balance1();
 
-        IUniswapV3SwapCallback(msg.sender).uniswapV3SwapCallback(amount0, amount1);
+        IUniswapV3SwapCallback(msg.sender).uniswapV3SwapCallback(amount0, amount1, data);
 
         if (balance1Before + uint256(amount1) < balance1()) {
             revert InsufficientInputAmount();
